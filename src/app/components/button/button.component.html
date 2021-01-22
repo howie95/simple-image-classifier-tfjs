@@ -1,6 +1,6 @@
-<div class="button-container {{disable?'disable':''}}">
+<div class="button-container {{disable?'disable':''}} {{type=='progress'?'progress':''}}">
   <div class="background">
-    
+    <div class="progress-bar" *ngIf="type=='progress'" [ngStyle]="{width: progressPercent}"></div>
   </div>
   <span class="label">{{label}}</span>
 </div>

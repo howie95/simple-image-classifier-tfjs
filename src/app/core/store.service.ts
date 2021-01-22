@@ -64,7 +64,7 @@ export class StoreService {
 
     let datasetImage = await this.imageService.makeImageDataset(imageDataList , this.imageSideLength, {
       onProgress: progress => {
-        opt?.onProgress((0.2 * progress).toFixed(1))
+        opt?.onProgress(parseFloat((0.2 * progress).toFixed(2)))
       }
     })
     
@@ -73,9 +73,9 @@ export class StoreService {
     let labels = this.tfjsService.makeLabelOneHot(imageLabelList,this.modelLabels.length)
 
     this.trainModel = this.tfjsService.makeNewModel(this.modelLabels.length, this.imageSideLength)
-    await this.tfjsService.trainModel(this.trainModel, xs, labels, {
+    const trainHistory = await this.tfjsService.trainModel(this.trainModel, xs, labels, {
       onProgress: progress => {
-        opt?.onProgress((0.7 * progress + 0.2).toFixed(1))
+        opt?.onProgress(parseFloat((0.8 * progress + 0.2).toFixed(2)))
       }
     })
 

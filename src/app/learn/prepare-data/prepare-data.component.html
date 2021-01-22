@@ -15,11 +15,26 @@
     <span class="item-count {{c.images.length>4?'right':'wrong'}}">{{c.images.length}}</span>
     <span class="item-label">{{c.label}}</span>
   </div>
+  <div class="class-list-item" (click)="testFuc()">
+    <div class="item-bg"></div>
+    <div class="item-cover"></div>
+    <div class="item-add">
+      <svg class="item-add" xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 56 56">
+        <rect width="56" height="6" rx="3" transform="translate(0 24.5)" fill="#c1ceef"/>
+        <rect width="56" height="6" rx="3" transform="translate(30.794) rotate(90)" fill="#c1ceef"/>
+      </svg> 
+    </div>   
+  </div>
 </div>
 
 <div class="action-line">
-  <p class="action-line-tips {{getActionTipsStatus()}}">Good, it seems like your data is ready 🥳</p>
-  <app-button [label]="buttonLabel"></app-button>
+  <p class="action-line-tips {{isDataReady?'right':'wrong'}}">{{actionTips}}</p>
+  <app-button 
+    [label]="buttonLabel"
+    [type]="isTraining?'progress':'normal'"
+    [progress]="buttonProgress"
+    [disable]="isDataReady?false:true"
+    (click)="startLearnProcess()"></app-button>
 </div>
 
 <!-- <input (change)="imageSelected($event)" type="file" name="image" id="imageInput">

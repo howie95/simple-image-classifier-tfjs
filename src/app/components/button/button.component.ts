@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { input } from '@tensorflow/tfjs';
 
 @Component({
   selector: 'app-button',
@@ -9,12 +8,15 @@ import { input } from '@tensorflow/tfjs';
 export class ButtonComponent implements OnInit {
   @Input() label: string = ''
   @Input() type: string = 'normal'
-  @Input() progress: number = 0
   @Input() disable: boolean = false
+  @Input() set progress(value: number) {
+    this.progressPercent = value * 100 + '%'
+  }
+
+  public progressPercent: string = '0%'
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

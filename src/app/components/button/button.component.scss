@@ -9,6 +9,12 @@
     opacity: .5;
     cursor: not-allowed;
   }
+  &.progress {
+    cursor: wait;
+    .background {
+      background-color: var(--color-card);
+    }
+  }
   .background {
     position: absolute;
     left: 0;
@@ -17,6 +23,15 @@
     bottom: 0;
     background-color: var(--color-true);
     z-index: 0;
+    transition: .2s all ease-out;
+    .progress-bar {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      background-color: var(--color-success);
+      transition: .3s all ease-out;
+    }
   }
   .label {
     position: relative;

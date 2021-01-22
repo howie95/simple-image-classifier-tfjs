@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { StoreService } from '../../core/store.service'
 
@@ -8,13 +8,48 @@ import { StoreService } from '../../core/store.service'
   styleUrls: ['./prepare-data.component.scss']
 })
 export class PrepareDataComponent implements OnInit {
-  buttonLabel = 'Start training !'
+  public buttonLabel = 'Start training !'
+  public buttonProgress = 0
+  public isTraining = false
+  public imageClassList = []
 
-  imageClassList = []
   private imageExampleLabels = ['poodle_dog', 'british_cat', 'red_apple']
+
+  get isDataReady() {
+    if(this.imageClassList.length <2 ) {
+      return false
+    }
+    for(let i = 0; i < this.imageClassList.length; i++) {
+      if(this.imageClassList[i].images.length < 5) {
+        return false
+      }
+    }
+    return true
+  }
+  get actionTips() {
+    let tips = 'Good, it seems like your data is ready 🥳'
+    if(this.imageClassList.length == 0) {
+      tips = 'Add a image class to start 👆'
+    }else{
+      if(this.imageClassList.length < 2) {
+        tips = 'You need at least 2 classes to start training 🤔️'
+      }
+      for(let i = 0; i < this.imageClassList.length; i++) {
+        if(this.imageClassList[i].images.length<5){
+          tips = 'A class need at least 5 images to be train 🤔️'
+          break
+        }
+      }
+    }
+    if(this.isTraining){
+      tips = ''
+    }
+    return tips
+  }
 
   constructor(
     private router: Router,
+    private zone: NgZone,
     private storeService: StoreService
   ) {}
 
@@ -45,13 +80,21 @@ export class PrepareDataComponent implements OnInit {
   }
 
   async startLearnProcess() {
-    this.storeService.startTrainTask({
-      onProgress: progress => {
-        console.log(progress)
+    this.isTraining = true
+    await this.storeService.startTrainTask({
+      onProgress: (progress: number) => {
+        if(progress - this.buttonProgress > 0.2 || progress === 1) {
+          //Not sure why it has to be in NgZone.run to trigger component refresh
+          this.zone.run(() => {
+            this.buttonProgress = progress
+          })
+        }
       }
     })
-    return
-    this.router.navigate(['/playing'])
+    setTimeout(() => {
+      this.router.navigate(['/playing'])
+      this.isTraining = false
+    }, 1000)
   }
   predictImageSelected(event) {
     try {

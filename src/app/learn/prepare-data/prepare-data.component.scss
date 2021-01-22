@@ -4,10 +4,19 @@
   flex-wrap: wrap;
   position: relative;
   left: -25px;
-  padding: 20px 25px;
   width: 100%;
-  height: 320px;
+  height: 300px;
+  padding: 20px 25px;
+  margin: 10px 0;
   overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 4px;
+    background-color: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: var(--color-card);
+    border-radius: 2px;
+  }
   .class-list-item {
     position: relative;
     width: 120px;
@@ -17,6 +26,9 @@
     margin-bottom: 20px;
     cursor: pointer;
     transition: .2s all ease-out;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     &:hover {
       transform: scale(1.1);
       .item-bg {
@@ -86,6 +98,12 @@
       word-break: break-all;
       max-width: 83px;
       backdrop-filter: blur(4px);
+      z-index: 2;
+    }
+    .item-add {
+      position: relative;
+      width: 56px;
+      height: 56px;
       z-index: 2;
     }
   }
