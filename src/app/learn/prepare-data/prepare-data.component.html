@@ -1,0 +1,33 @@
+<h1 class="page-title">Prepare Your Data</h1>
+
+<div class="class-list">
+  <div class="class-list-item" *ngFor="let c of imageClassList">
+    <div class="item-bg"
+      [ngStyle]="{
+        backgroundImage:c.images.length>0?'url(' + c.images[0] + ')':'unset'
+      }">
+    </div>
+    <div class="item-cover"
+      [ngStyle]="{
+        backgroundImage:c.images.length>0?'url(' + c.images[0] + ')':'unset'
+      }">
+    </div>
+    <span class="item-count {{c.images.length>4?'right':'wrong'}}">{{c.images.length}}</span>
+    <span class="item-label">{{c.label}}</span>
+  </div>
+</div>
+
+<div class="action-line">
+  <p class="action-line-tips {{getActionTipsStatus()}}">Good, it seems like your data is ready 🥳</p>
+  <app-button [label]="buttonLabel"></app-button>
+</div>
+
+<!-- <input (change)="imageSelected($event)" type="file" name="image" id="imageInput">
+
+<button (click)="startLearnProcess()">Start Learning</button>
+
+
+<button (click)="testFuc()">TEst</button>
+<div style="margin-top: 20px;">
+  <input (change)="predictImageSelected($event)" type="file" name="image" id="imageInput" title="选择并预测">
+</div> -->
