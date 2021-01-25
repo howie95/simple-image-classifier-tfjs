@@ -28,6 +28,12 @@ export class StoreService {
   ) { }
 
   /**
+   * Get stored model labels
+   */
+  getModelLabelList(): Observable<string[]> {
+    return of(this.modelLabels)
+  }
+  /**
    * Get stored imageClassList used by pages 
    */
   getImageClassList(): Observable<ImageClass[]> {
@@ -73,7 +79,7 @@ export class StoreService {
     let labels = this.tfjsService.makeLabelOneHot(imageLabelList,this.modelLabels.length)
 
     this.trainModel = this.tfjsService.makeNewModel(this.modelLabels.length, this.imageSideLength)
-    const trainHistory = await this.tfjsService.trainModel(this.trainModel, xs, labels, {
+    await this.tfjsService.trainModel(this.trainModel, xs, labels, {
       onProgress: progress => {
         opt?.onProgress(parseFloat((0.8 * progress + 0.2).toFixed(2)))
       }
@@ -87,14 +93,18 @@ export class StoreService {
   }
 
   async makePredict(imgUrl: string) {
-    let datasetImage = await this.imageService.makeImageDataset([{ image: imgUrl }], this.imageSideLength, {
-      onProgress: progress => {
-        console.log(progress)
-      }
-    })
+    let datasetImage = await this.imageService.makeImageDataset([{ image: imgUrl }], this.imageSideLength)
     let xs = this.tfjsService.getImagesTensor(datasetImage, 1, this.imageSideLength)
     const prediction = (this.trainModel.predict(xs) as tf.Tensor).dataSync()
-    console.log(prediction)
     xs.dispose()
+    let result = []
+    for (let i = 0; i < prediction.length; i++) {
+      result.push({
+        label: this.modelLabels[i],
+        value: parseFloat(prediction[i].toFixed(2))
+      })
+    }
+    result.sort((a, b) => b.value - a.value)
+    return result
   }
 }

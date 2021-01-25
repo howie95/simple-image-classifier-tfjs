@@ -1,1 +1,39 @@
 <h1 class="page-title">Playing with trained model</h1>
+
+<div class="classifier-container">
+  <div class="classifier-left">
+    <div class="classifier-image">
+      <div class="image-box" style="background-image: url({{classifierImage}});"></div>
+      <div class="image-box image-cover" [ngStyle]="{opacity:predictFinish?'0':'1'}">
+        <span class="icon">?</span>
+      </div>
+    </div>
+    <div class="classifier-ratio" *ngIf="predictFinish">
+      <ng-container *ngFor="let p of predictResultList; index as i">
+        <div class="ratio-item {{p.value >= 0.6 ? 'active' : ''}}" *ngIf="i < 2 && p.value!= 0">
+          <span class="label">{{p.label}}</span>
+          <div class="bar-outside">
+            <div class="bar-inside" [ngStyle]="{width: showRatioBarAnim? p.value*100 + '%' : '0%'}"></div>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </div>
+  <div class="classifier-right">
+    <p class="classifier-title">{{classifierTitle}}</p>
+    <p class="classifier-content" *ngIf="!predictFinish">Now you can choose an image that the model never saw before and let the model guess what item it is 😉</p>
+    <p class="classifier-content" *ngIf="predictFinish">Am I right?
+      <br>The prediction accurate is affected by various factors, such as the quantities of train data that you provide.
+      <br>Since I’m a newbie to MachineLearning and TensorFlow,  The image classifier used a very simple model architecture which you can check in the Github.
+      <br><br>This project is inspired by Handwritten digit recognition and Lobe.ai
+    </p>
+    
+    <div class="classifier-button">
+      <app-button 
+        [label]="predictFinish?'Choose another image':'Choose an image'"
+        (click)="tryChooseImage()">
+      </app-button>
+      <input type="file" name="image" id="imageInput" (change)="predictImageSelected($event)">
+    </div>
+  </div>
+</div>

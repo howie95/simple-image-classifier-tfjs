@@ -30,24 +30,23 @@
     justify-content: center;
     align-items: center;
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.05);
       .item-bg {
-        filter: blur(8px);
-        opacity: .6;
+        filter: blur(6px) saturate(150%) brightness(140%);
       }
     }
     .item-bg {
       position: absolute;
-      left: 0;
+      left: 10px;
       top: 6px;
-      width: 120px;
+      width: 100px;
       height: 140px;
       border-radius: 25px;
       background-size: cover;
       background-position: center;
       background-color: #e2e6f1;
-      filter: blur(7px);
-      opacity: .7;
+      filter: blur(5px) saturate(130%) brightness(120%);
+      opacity: .6;
       z-index: 0;
       transition: .2s all ease-in-out;
     }

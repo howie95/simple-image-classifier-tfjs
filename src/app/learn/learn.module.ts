@@ -4,16 +4,16 @@ import { LearnPrepareRoutingModule, LearnPlayingRoutingModule } from './learn-ro
 import { PrepareDataComponent } from './prepare-data/prepare-data.component'
 import { PlayingModelComponent } from './playing-model/playing-model.component'
 
-import { ButtonComponent } from '../components/button/button.component';
+import { ComponentsModule } from '../components/components.module'
 
 @NgModule({
   declarations: [
-    PrepareDataComponent,
-    ButtonComponent
+    PrepareDataComponent
   ],
   imports: [
     CommonModule,
-    LearnPrepareRoutingModule
+    LearnPrepareRoutingModule,
+    ComponentsModule
   ]
 })
 export class LearnPrepareModule { }
@@ -23,7 +23,8 @@ export class LearnPrepareModule { }
   ],
   imports: [
     CommonModule,
-    LearnPlayingRoutingModule
+    LearnPlayingRoutingModule,
+    ComponentsModule
   ]
 })
 export class LearnPlayingModule { }
