@@ -60,11 +60,11 @@ export class PrepareDataComponent implements OnInit {
         this.storeService.addImageClass({
           label: label,
           images: [
-            `../../../assets/example_images/${label}/${label}_0.png`,
-            `../../../assets/example_images/${label}/${label}_1.png`,
-            `../../../assets/example_images/${label}/${label}_2.png`,
-            `../../../assets/example_images/${label}/${label}_3.png`,
-            `../../../assets/example_images/${label}/${label}_4.png`
+            `./assets/example_images/${label}/${label}_0.png`,
+            `./assets/example_images/${label}/${label}_1.png`,
+            `./assets/example_images/${label}/${label}_2.png`,
+            `./assets/example_images/${label}/${label}_3.png`,
+            `./assets/example_images/${label}/${label}_4.png`
           ]
         })
       })

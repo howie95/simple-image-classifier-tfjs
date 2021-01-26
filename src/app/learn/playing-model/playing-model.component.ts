@@ -15,7 +15,7 @@ export class PlayingModelComponent implements OnInit {
   private predictImageUrl: string = ''
 
   get classifierImage(): string {
-    return this.predictImageUrl || '../../../assets/poodle_dog_guess.png'
+    return this.predictImageUrl || './assets/poodle_dog_guess.png'
   }
   get classifierTitle(): string {
     let text = 'Since your model has been trained...'
