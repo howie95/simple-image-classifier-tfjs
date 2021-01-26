@@ -1,0 +1,30 @@
+:root {
+  --color-main: #444D67;
+  --color-sub: #C1CEEF;
+  --color-true: #5bb2be;
+  --color-false: #fa5a7d;
+  --color-card: #f4f7ff;
+  --color-success: #5bbe8d;
+  --font-size-title: 30px;
+  --font-size-sub-title: 25px;
+  --font-size-normal: 20px;
+  --font-family-main: "Yuanti SC";
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: #F8F8F8;
+}
+
+.page-title {
+  color: var(--color-main);
+  font-size: var(--font-size-title);
+  font-weight: bold;
+  font-family: var(--font-family-main);
+}
+
+/*# sourceMappingURL=styles.css.map*/

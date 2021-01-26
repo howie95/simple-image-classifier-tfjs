@@ -55,20 +55,21 @@ export class PrepareDataComponent implements OnInit {
 
   ngOnInit(): void {
     this.storeService.getImageClassList().subscribe(list => this.imageClassList = list)
-    this.imageExampleLabels.forEach( label => {
-      this.storeService.addImageClass({
-        label: label,
-        images: [
-          `../../../assets/example_images/${label}/${label}_0.png`,
-          `../../../assets/example_images/${label}/${label}_1.png`,
-          `../../../assets/example_images/${label}/${label}_2.png`,
-          `../../../assets/example_images/${label}/${label}_3.png`,
-          `../../../assets/example_images/${label}/${label}_4.png`
-        ]
+    if(this.imageClassList.length == 0) {
+      this.imageExampleLabels.forEach( label => {
+        this.storeService.addImageClass({
+          label: label,
+          images: [
+            `../../../assets/example_images/${label}/${label}_0.png`,
+            `../../../assets/example_images/${label}/${label}_1.png`,
+            `../../../assets/example_images/${label}/${label}_2.png`,
+            `../../../assets/example_images/${label}/${label}_3.png`,
+            `../../../assets/example_images/${label}/${label}_4.png`
+          ]
+        })
       })
-    })
+    }
   }
-  testInc = 0
   testFuc() {
     this.storeService.addImageClass({
       label: '1',
