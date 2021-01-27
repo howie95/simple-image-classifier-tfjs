@@ -74,22 +74,20 @@ export class StoreService {
       }
     })
     
-    let xs = this.tfjsService.getImagesTensor(datasetImage, imageDataList.length, this.imageSideLength)
-
-    let labels = this.tfjsService.makeLabelOneHot(imageLabelList,this.modelLabels.length)
-
+    const [trainXs, trainYs] = tf.tidy(() => {
+      return [
+        this.tfjsService.getImagesTensor(datasetImage, imageDataList.length, this.imageSideLength),
+        this.tfjsService.makeLabelOneHot(imageLabelList,this.modelLabels.length)
+      ]
+    })
     this.trainModel = this.tfjsService.makeNewModel(this.modelLabels.length, this.imageSideLength)
-    await this.tfjsService.trainModel(this.trainModel, xs, labels, {
+    await this.tfjsService.trainModel(this.trainModel, trainXs, trainYs, {
       onProgress: progress => {
         opt?.onProgress(parseFloat((0.8 * progress + 0.2).toFixed(2)))
       }
     })
 
-    xs.dispose()
-    labels.dispose()
-
     opt?.onProgress(1)
-    console.log(this.modelLabels)
   }
 
   async makePredict(imgUrl: string) {

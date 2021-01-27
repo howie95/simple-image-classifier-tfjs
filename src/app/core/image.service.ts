@@ -17,10 +17,13 @@ export class ImageService {
   async getImageData(url: string, sideLength: number) {
     const canvas = document.createElement('canvas')
     const ctx = canvas.getContext("2d")
+    canvas.width = sideLength
+    canvas.height = sideLength
     const imgDataLoad = new Promise((resolve, reject) => {
       const image = new Image
       image.onload = () => {
-        ctx.drawImage(image, 0, 0)
+        let drawRect = this.getCanvasRect(sideLength,sideLength,image.width,image.height)
+        ctx.drawImage(image,drawRect.rectX,drawRect.rectY,drawRect.rectW,drawRect.rectH,0,0,sideLength,sideLength)
         resolve(true)
       }
       image.src = url
@@ -30,6 +33,25 @@ export class ImageService {
     return imageData
   }
 
+  getCanvasRect(canvasW: number, canvasH: number, SourceW: number, SourceH: number) {
+    let rectX = 0,
+        rectY = 0,
+        rectW = SourceW,
+        rectH = SourceH
+    if(SourceW > SourceH || (SourceW == SourceH && canvasW < canvasH)) {
+      rectW = canvasW * SourceH / canvasH
+      rectX = (SourceW - rectW) / 2
+    }else if(SourceW < SourceH || (SourceW == SourceH && canvasW > canvasH)) {
+      rectH = canvasH * SourceW / canvasW
+      rectY = (SourceH - rectH) / 2
+    }
+    return {
+      rectX,
+      rectY,
+      rectW,
+      rectH
+    }
+  }
   /**
   * Make imageDataset from classified images list
   * @param imageClassList an ImageClass list

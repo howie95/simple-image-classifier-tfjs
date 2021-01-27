@@ -57,16 +57,14 @@ export class PrepareDataComponent implements OnInit {
     this.storeService.getImageClassList().subscribe(list => this.imageClassList = list)
     if(this.imageClassList.length == 0) {
       this.imageExampleLabels.forEach( label => {
-        this.storeService.addImageClass({
+        let imageClass = {
           label: label,
-          images: [
-            `./assets/example_images/${label}/${label}_0.png`,
-            `./assets/example_images/${label}/${label}_1.png`,
-            `./assets/example_images/${label}/${label}_2.png`,
-            `./assets/example_images/${label}/${label}_3.png`,
-            `./assets/example_images/${label}/${label}_4.png`
-          ]
-        })
+          images: []
+        }
+        for (let index = 0; index < 10; index++) {
+          imageClass.images.push(`./assets/example_images/${label}/${label}_${index}.png`)
+        }
+        this.storeService.addImageClass(imageClass)
       })
     }
   }

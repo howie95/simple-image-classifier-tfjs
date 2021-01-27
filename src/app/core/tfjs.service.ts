@@ -10,10 +10,10 @@ export class TfjsService {
   }
 
   makeLabelOneHot(imageLabels: number[], modelLabelLength: number) {
-    let l1d = tf.expandDims(imageLabels,1)
-    let i1d = tf.expandDims(tf.range(0,imageLabels.length),1)
-    let c1d = tf.concat([i1d,l1d],1).toInt()
-    let one_hot = tf.sparseToDense(c1d,1,tf.zeros([imageLabels.length,modelLabelLength]).shape)
+    let l1d = tf.expandDims(imageLabels, 1)
+    let i1d = tf.expandDims(tf.range(0,imageLabels.length), 1)
+    let c1d = tf.concat([i1d, l1d], 1).toInt()
+    let one_hot = tf.sparseToDense(c1d, 1, tf.zeros([imageLabels.length, modelLabelLength]).shape)
     return one_hot
   }
   
@@ -64,7 +64,7 @@ export class TfjsService {
 
   trainModel(model: tf.LayersModel, xs: tf.Tensor, ys: tf.Tensor, opt?: { onProgress: Function }) {
     return model.fit(xs, ys, {
-      batchSize: xs.shape[0],
+      batchSize: 5,
       epochs: 20,
       shuffle: true,
       callbacks: {
