@@ -20,12 +20,12 @@
     </div>
   </div>
   <div class="classifier-right">
-    <p class="classifier-title">{{classifierTitle}}</p>
-    <p class="classifier-content" *ngIf="!predictFinish">Now you can choose an image that the model never saw before and let the model guess what item it is 😉</p>
-    <p class="classifier-content" *ngIf="predictFinish">Am I right?
-      <br>The prediction accurate is affected by various factors, such as the quantities of train data that you provide.
-      <br>Since I’m a newbie to MachineLearning and TensorFlow,  The image classifier used a very simple model architecture which you can check in the Github.
-      <br><br>This project is inspired by Handwritten digit recognition and Lobe.ai
+    <h2 class="classifier-title page-subtitle">{{classifierTitle}}</h2>
+    <p class="classifier-content page-text" *ngIf="!predictFinish">Now you can choose an image that the model never saw before and let the model guess what item it is 😉</p>
+    <p class="classifier-content page-text" *ngIf="predictFinish">Am I right?
+      <br><br>The prediction accurate is affected by various factors, such as the quantities of train data that you provide.
+      <br>Since I’m a newbie to MachineLearning and TensorFlow,  this image classifier used a very simple model architecture which is not reliable, you can check the code through 
+      <a href="https://github.com/howie95/simple-image-classifier-tfjs" target="_blank" rel="noopener noreferrer">Github</a>.
     </p>
     
     <div class="classifier-button">

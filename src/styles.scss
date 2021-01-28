@@ -27,3 +27,25 @@ body {
     family: var(--font-family-main);
   }
 }
+.page-subtitle {
+  color: var(--color-true);
+  font: {
+    size: var(--font-size-sub-title);
+    weight: bold;
+    family: var(--font-family-main);
+  }
+}
+.page-text {
+  color: var(--color-true);
+  font: {
+    size: var(--font-size-normal);
+    family: var(--font-family-main);
+  }
+  a {
+    color: var(--color-true);
+    font-style: italic;
+  }
+}
+.page-paragraph {
+  margin-bottom: 10px;
+}

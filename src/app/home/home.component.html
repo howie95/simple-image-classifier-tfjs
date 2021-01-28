@@ -1,4 +1,31 @@
-<p class="page-title">A Simple Image Classifier Machine Learning</p>
+<h1 class="page-title">A Simple Image Classifier</h1>
+
 <div class="home-container">
-  <app-button [label]="'Start'" (click)="makeNewModel()"></app-button>
+  <div class="page-paragraph">
+    <h2 class="page-subtitle">What 🧐</h2>
+    <p class="page-text">
+      This machine learning application is powered by Angular and TensorFlow.js,
+      you can train a simple image classifier in your browser without backend support.
+    </p>
+  </div>
+  <div class="page-paragraph">
+    <h2 class="page-subtitle">How 🤓</h2>
+    <p class="page-text">
+      First of all, prepare your images, group them into classes.<br>
+      I already preset some train data for you to use.<br>
+      Then import and label them in the next step and press training button.<br>
+      Well done, now you can playing with your trained classifier!
+    </p>
+  </div>
+  <div class="page-paragraph">
+    <h2 class="page-subtitle">About 🤗</h2>
+    <p class="page-text">
+      This project was made while learning TensorFlow.js, so the model is very simple and may not reliable🥺.<br>
+      Also the project is inspired by the
+      <a href="https://teachablemachine.withgoogle.com/" target="_blank" rel="noopener noreferrer">TeachableMachine</a>
+       and 
+      <a href="https://lobe.ai/" target="_blank" rel="noopener noreferrer">Lobe.ai</a>
+    </p>
+  </div>
 </div>
+<app-button [label]="'Get Started'" (click)="makeNewModel()" style="float: right;"></app-button>

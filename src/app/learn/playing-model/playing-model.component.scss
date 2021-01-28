@@ -88,18 +88,11 @@
   .classifier-right {
     margin-left: 30px;
     .classifier-title {
-      font-size: var(--font-size-sub-title);
-      font-weight: bold;
-      font-family: var(--font-family-main);
-      color: var(--color-true);
       margin-bottom: 10px;
     }
     .classifier-content {
       min-height: 130px;
       margin-bottom: 15px;
-      font-size: var(--font-size-normal);
-      font-family: var(--font-family-main);
-      color: var(--color-true);
     }
     .classifier-button {
       display: inline-block;
